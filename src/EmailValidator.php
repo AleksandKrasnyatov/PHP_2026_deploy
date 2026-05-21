@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App;
+
 class EmailValidator
 {
     public function validate(string $email): bool

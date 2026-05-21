@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Test;
+namespace Test\Unit;
 
 use App\EmailValidator;
 use PHPUnit\Framework\Attributes\TestWith;
