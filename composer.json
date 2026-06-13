@@ -24,5 +24,9 @@
         "phpstan": "phpstan analyse src --level=max",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-text"
+    },
+    "require": {
+        "slim/slim": "^4.15",
+        "slim/psr7": "^1.8"
     }
 }
