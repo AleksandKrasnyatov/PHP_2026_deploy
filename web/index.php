@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\EmailValidator;
+use App\Application\EmailValidator;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;

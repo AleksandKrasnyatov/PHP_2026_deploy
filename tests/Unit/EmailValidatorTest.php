@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Test\Unit;
 
-use App\EmailValidator;
+use App\Application\EmailValidator;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 
