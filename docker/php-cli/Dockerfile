@@ -1,18 +1,9 @@
 FROM php:8.5-cli
 
-RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    libzip-dev \
-    libmemcached-dev \
-    zlib1g-dev \
-    libssl-dev \
-    libsasl2-dev \
-    pkg-config && \
-    docker-php-ext-install zip && \
-    pecl install redis memcached xdebug && \
-    docker-php-ext-enable redis memcached xdebug && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git unzip libzip-dev \
+    && docker-php-ext-install sockets bcmath \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY conf.d /usr/local/etc/php/conf.d
 
