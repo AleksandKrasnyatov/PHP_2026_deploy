@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\RabbitMq;
+namespace App\Infrastructure\RabbitMq\Amqp;
 
 use Exception;
 use PhpAmqpLib\Channel\AMQPChannel;

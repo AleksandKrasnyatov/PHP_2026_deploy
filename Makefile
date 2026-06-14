@@ -23,6 +23,12 @@ composer-install:
 index:
 	docker-compose run --rm php-cli php bin/index.php
 
+consume:
+	docker-compose run --rm php-cli php bin/consume.php
+
+publish:
+	docker-compose run --rm php-cli php bin/publish.php $(EMAIL)
+
 test:
 	docker-compose run --rm php-cli composer test
 

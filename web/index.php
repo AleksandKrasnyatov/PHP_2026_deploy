@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Application\EmailValidator;
+use App\Domain\ValueObject\Email;
+use App\Infrastructure\RabbitMq\Worker\Producer;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -41,11 +43,14 @@ $app->post('/email', function (Request $request, Response $response): Response {
     $data = $request->getParsedBody();
     $email = trim(is_array($data) ? (string) ($data['email'] ?? '') : '');
 
-    $statusClass = 'success';
-    $message = 'Запрос успешно отправлен!';
-    if (!new EmailValidator()->validate($email)) {
-        $statusClass = 'error';
-        $message = 'Указан не корректный email';
+    $statusClass = 'error';
+    $message = 'Указан не корректный email';
+    if (new EmailValidator()->validate($email)) {
+        $statusClass = 'success';
+        $message = 'Запрос успешно отправлен!';
+
+        $email = new Email($email);
+        Producer::create()->publish($email);
     }
 
     $html = <<<HTML
