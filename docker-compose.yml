@@ -17,8 +17,10 @@ services:
       - ./:/app
     depends_on:
       - rabbitmq
+      - mailpit
     env_file:
       - .env
+      - .env.local
 
   php-cli:
     build:
@@ -27,8 +29,16 @@ services:
       - ./:/app
     depends_on:
       - rabbitmq
+      - mailpit
     env_file:
       - .env
+      - .env.local
+
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - "8025:8025"
+      - "1025:1025"
 
   rabbitmq:
     image: rabbitmq:3.13-management

@@ -51,11 +51,6 @@ final class Topology
     public const int RETRY_TTL_MS = 5000;
 
     /**
-     * Сколько раз пытаемся обработать, прежде чем сдаться и отправить в parking lot.
-     */
-    public const int MAX_ATTEMPTS = 3;
-
-    /**
      * Routing key для всех сообщений демо (default-стиль: один ключ).
      */
     public const string ROUTING_KEY = 'notification';

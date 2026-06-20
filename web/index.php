@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Application\EmailValidator;
 use App\Domain\ValueObject\Email;
+use App\Domain\ValueObject\TelegramChatId;
 use App\Infrastructure\RabbitMq\Worker\Producer;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -29,6 +29,8 @@ $app->get('/', function (Request $request, Response $response): Response {
             <form method="post" action="/email">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
+                <label for="chatId">TelegramChatId <small>(числовой Id из Telegram бота @userinfobot)</small></label>
+                <input type="number" id="chatId" name="chatId">
                 <button type="submit">Отправить</button>
             </form>
         </body>
@@ -41,16 +43,16 @@ $app->get('/', function (Request $request, Response $response): Response {
 
 $app->post('/email', function (Request $request, Response $response): Response {
     $data = $request->getParsedBody();
-    $email = trim(is_array($data) ? (string) ($data['email'] ?? '') : '');
+    $statusClass = 'success';
+    $message = 'Запрос успешно отправлен!';
 
-    $statusClass = 'error';
-    $message = 'Указан не корректный email';
-    if (new EmailValidator()->validate($email)) {
-        $statusClass = 'success';
-        $message = 'Запрос успешно отправлен!';
-
-        $email = new Email($email);
-        Producer::create()->publish($email);
+    try {
+        $email = new Email($data['email'] ?? '');
+        $chatId = empty($data['chatId'] ) ? null : new TelegramChatId((int) $data['chatId']);
+        Producer::create()->publish($email, $chatId);
+    } catch (InvalidArgumentException $exception) {
+        $statusClass = 'error';
+        $message = 'Указаны не корректные данные: ' . $exception->getMessage();
     }
 
     $html = <<<HTML

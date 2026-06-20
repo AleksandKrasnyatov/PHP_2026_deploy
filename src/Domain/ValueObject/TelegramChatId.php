@@ -6,9 +6,9 @@ namespace App\Domain\ValueObject;
 
 use Webmozart\Assert\Assert;
 
-class Email
+class TelegramChatId
 {
-    public string $value {
+    public int $value {
         get {
             return $this->value;
         }
@@ -17,9 +17,9 @@ class Email
         }
     }
 
-    public function __construct(string $email)
+    public function __construct(int $value)
     {
-        Assert::email($email, 'Передан неправильный email');
-        $this->value = $email;
+        Assert::positiveInteger($value, 'Id чата должно быть больше 0');
+        $this->value = $value;
     }
 }
