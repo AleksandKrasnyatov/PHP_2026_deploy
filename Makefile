@@ -1,11 +1,8 @@
-init: copy-env docker-down-clear docker-build docker-up composer-install
+init: docker-down-clear docker-build docker-up composer-install
 up: docker-up
 down: docker-down
 restart: down up
 check: lint cs-check phpstan test
-
-copy-env:
-	[ -f .env.local ] || cp .env .env.local
 
 docker-up:
 	docker-compose up -d

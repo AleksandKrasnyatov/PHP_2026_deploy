@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\RabbitMq\Worker;
 
-use App\Domain\ValueObject\Email;
-use App\Domain\ValueObject\TelegramChatId;
 use App\Infrastructure\RabbitMq\Amqp\Connection;
 use App\Infrastructure\RabbitMq\Amqp\Topology;
 use PhpAmqpLib\Message\AMQPMessage;
@@ -26,15 +24,12 @@ final readonly class Producer
         );
     }
 
-    public function publish(Email $email, ?TelegramChatId $chatId = null): void
+    public function publish(): void
     {
         $channel = $this->connection->channel();
         $this->topology->declare($channel);
 
-        $payload = [
-            'email' => $email->value,
-            'chatId' => $chatId?->value,
-        ];
+        $payload = [];
 
         $message = new AMQPMessage(
             body: json_encode($payload, JSON_UNESCAPED_UNICODE),
