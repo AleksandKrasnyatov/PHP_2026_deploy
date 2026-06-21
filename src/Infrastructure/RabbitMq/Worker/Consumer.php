@@ -16,14 +16,6 @@ final readonly class Consumer
     ) {
     }
 
-    public static function create(): self
-    {
-        return new self(
-            Connection::fromEnv(),
-            new Topology(),
-        );
-    }
-
     public function consume(): void
     {
         $channel = $this->connection->channel();

@@ -22,17 +22,6 @@ final class Connection
     ) {
     }
 
-    public static function fromEnv(): self
-    {
-        return new self(
-            host: getenv('RABBITMQ_HOST') ?: 'localhost',
-            port: (int)(getenv('RABBITMQ_PORT') ?: 5672),
-            user: getenv('RABBITMQ_USER') ?: 'guest',
-            password: getenv('RABBITMQ_PASSWORD') ?: 'guest',
-            vhost: getenv('RABBITMQ_VHOST') ?: '/'
-        );
-    }
-
     public function channel(): AMQPChannel
     {
         if (empty($this->channel)) {

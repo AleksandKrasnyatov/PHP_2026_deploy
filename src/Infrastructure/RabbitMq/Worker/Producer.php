@@ -16,14 +16,6 @@ final readonly class Producer
     ) {
     }
 
-    public static function create(): self
-    {
-        return new self(
-            Connection::fromEnv(),
-            new Topology()
-        );
-    }
-
     public function publish(): void
     {
         $channel = $this->connection->channel();

@@ -4,7 +4,11 @@
 declare(strict_types=1);
 
 use App\Infrastructure\RabbitMq\Worker\Consumer;
+use DI\Container;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-Consumer::create()->consume();
+/** @var Container $container */
+$container = require __DIR__ . '/../config/container.php';
+
+$container->get(Consumer::class)->consume();
