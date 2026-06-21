@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\RabbitMq\Worker;
+namespace App\Infrastructure\MessageBroker\Worker;
 
-use App\Infrastructure\RabbitMq\Amqp\Connection;
-use App\Infrastructure\RabbitMq\Amqp\Topology;
+use App\Application\Gateway\MessageBroker\Message\MessageInterface;
+use App\Application\Gateway\MessageBroker\ProducerInterface;
+use App\Infrastructure\MessageBroker\Amqp\Connection;
+use App\Infrastructure\MessageBroker\Amqp\Topology;
 use PhpAmqpLib\Message\AMQPMessage;
 
-final readonly class Producer
+final readonly class Producer implements ProducerInterface
 {
     public function __construct(
         private Connection $connection,
@@ -16,7 +18,7 @@ final readonly class Producer
     ) {
     }
 
-    public function publish(): void
+    public function publish(MessageInterface $message): void
     {
         $channel = $this->connection->channel();
         $this->topology->declare($channel);

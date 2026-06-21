@@ -10,8 +10,8 @@ use App\Domain\ValueObject\Id;
 final class Task
 {
     public function __construct(
-        public Id $id,
-        private Status $status
+        public readonly Id $id,
+        private Status $status,
     ) {
     }
 

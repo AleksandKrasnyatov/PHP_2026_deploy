@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\RabbitMq\Worker;
+namespace App\Infrastructure\MessageBroker\Worker;
 
-use App\Infrastructure\RabbitMq\Amqp\Connection;
-use App\Infrastructure\RabbitMq\Amqp\Topology;
+use App\Application\Gateway\MessageBroker\ConsumerInterface;
+use App\Infrastructure\MessageBroker\Amqp\Connection;
+use App\Infrastructure\MessageBroker\Amqp\Topology;
 use PhpAmqpLib\Message\AMQPMessage;
 
-final readonly class Consumer
+final readonly class Consumer implements ConsumerInterface
 {
     public function __construct(
         private Connection $connection,
