@@ -32,7 +32,7 @@ final readonly class Producer
         $payload = [];
 
         $message = new AMQPMessage(
-            body: json_encode($payload, JSON_UNESCAPED_UNICODE),
+            body: (string) json_encode($payload, JSON_UNESCAPED_UNICODE),
             properties: [
                 'content_type' => 'application/json',
                 'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT,
