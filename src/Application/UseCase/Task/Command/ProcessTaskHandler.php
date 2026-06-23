@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Alex\Php2026\Application\UseCase\Task\Command;
+namespace App\Application\UseCase\Task\Command;
 
 use App\Domain\Entity\Task;
 use App\Domain\Repository\TaskRepository;

@@ -3,7 +3,7 @@
 
 declare(strict_types=1);
 
-use App\Infrastructure\RabbitMq\Worker\Consumer;
+use App\Infrastructure\MessageBroker\Worker\Consumer;
 use DI\Container;
 
 require __DIR__ . '/../vendor/autoload.php';

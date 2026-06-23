@@ -24,8 +24,8 @@ final readonly class Producer implements ProducerInterface
         $this->topology->declare($channel);
 
 
-        $message = new AMQPMessage(
-            body: $message->getPayload(),
+        $amqpMessage = new AMQPMessage(
+            body: serialize($message),
             properties: [
                 'content_type' => 'application/json',
                 'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT,
@@ -33,9 +33,9 @@ final readonly class Producer implements ProducerInterface
         );
 
         $channel->basic_publish(
-            msg: $message,
+            msg: $amqpMessage,
             exchange: Topology::WORK_EXCHANGE,
-            routing_key: Topology::ROUTING_KEY
+            routing_key: $message->getRoutingKey(),
         );
     }
 }

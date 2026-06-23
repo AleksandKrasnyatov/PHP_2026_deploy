@@ -54,6 +54,10 @@ final class Topology
      * Routing key для всех сообщений демо (default-стиль: один ключ).
      */
     public const string ROUTING_KEY = 'notification';
+    /**
+     * Сколько раз пытаемся обработать, прежде чем сдаться и отправить в parking lot.
+     */
+    public const int MAX_ATTEMPTS = 5;
 
     /**
      * Объявляет всю топологию на переданном канале.
