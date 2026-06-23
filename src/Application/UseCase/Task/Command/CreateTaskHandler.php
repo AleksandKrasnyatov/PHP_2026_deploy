@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\UseCase\Task\Command;
 
-use App\Application\Gateway\MessageBroker\Message\ProcessTaskCommand;
+use App\Application\Gateway\MessageBroker\Message\ProcessTaskMessage;
 use App\Application\Gateway\MessageBroker\ProducerInterface;
 use App\Domain\Entity\Task;
 use App\Domain\Repository\TaskRepository;
@@ -24,7 +24,7 @@ final readonly class CreateTaskHandler
 
         //тут нужно использовать outbox паттерн, чтобы не потерять согласованность, если что-то упадет
         $this->tasks->save($task);
-        $this->producer->publish(new ProcessTaskCommand($task->id, $command->name));
+        $this->producer->publish(new ProcessTaskMessage($task->id, $command->name));
 
         return $task->id;
     }

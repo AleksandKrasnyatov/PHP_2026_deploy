@@ -6,7 +6,7 @@ namespace App\Application\Gateway\MessageBroker\Message;
 
 use App\Domain\ValueObject\Id;
 
-final readonly class ProcessTaskCommand implements MessageInterface
+final readonly class ProcessTaskMessage implements MessageInterface
 {
     public function __construct(
         public Id $taskId,
