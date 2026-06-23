@@ -23,10 +23,9 @@ final readonly class Producer implements ProducerInterface
         $channel = $this->connection->channel();
         $this->topology->declare($channel);
 
-        $payload = [];
 
         $message = new AMQPMessage(
-            body: (string) json_encode($payload, JSON_UNESCAPED_UNICODE),
+            body: $message->getPayload(),
             properties: [
                 'content_type' => 'application/json',
                 'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT,

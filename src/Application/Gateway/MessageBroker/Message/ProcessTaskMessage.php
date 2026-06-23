@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace App\Application\Gateway\MessageBroker\Message;
 
-use App\Domain\ValueObject\Id;
-
 final readonly class ProcessTaskMessage implements MessageInterface
 {
     public function __construct(
-        public Id $taskId,
+        public string $taskId,
         public string $userName,
     ) {
     }
@@ -22,5 +20,16 @@ final readonly class ProcessTaskMessage implements MessageInterface
     public function getRoutingKey(): string
     {
         // TODO: Implement getRoutingKey() method.
+    }
+
+    public function getPayload(): string
+    {
+        return (string) json_encode(
+            [
+                'taskId' => $this->taskId,
+                'userName' => $this->userName,
+            ],
+            JSON_UNESCAPED_UNICODE
+        );
     }
 }

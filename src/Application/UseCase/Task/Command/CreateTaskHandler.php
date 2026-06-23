@@ -24,7 +24,7 @@ final readonly class CreateTaskHandler
 
         //тут нужно использовать outbox паттерн, чтобы не потерять согласованность, если что-то упадет
         $this->tasks->save($task);
-        $this->producer->publish(new ProcessTaskMessage($task->id, $command->name));
+        $this->producer->publish(new ProcessTaskMessage($task->id->value, $command->name));
 
         return $task->id;
     }
