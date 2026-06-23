@@ -4,16 +4,33 @@ declare(strict_types=1);
 
 use App\Application\Gateway\MessageBroker\Message\MessageDispatcher;
 use App\Application\Gateway\MessageBroker\Message\ProcessTaskMessageHandler;
-use App\Application\UseCase\Task\Command\ProcessTaskHandler;
+use App\Domain\Repository\TaskRepositoryInterface;
 use App\Infrastructure\MessageBroker\Amqp\Connection;
+use App\Infrastructure\Repository\TaskRepository;
+use Predis\Client;
 use Psr\Container\ContainerInterface;
 use Slim\Views\Twig;
 
 use function DI\add;
+use function DI\autowire;
 use function DI\get;
 
 return [
     Twig::class => static fn (): Twig => Twig::create('/app/src/Infrastructure/Http/Template', ['cache' => false]),
+    Client::class => static function (): Client {
+        static $connection = null;
+
+        if ($connection === null) {
+            $connection = new Client([
+                'host' => getenv('REDIS_HOST') ?: 'redis',
+                'port' => (int) (getenv('REDIS_PORT') ?: 6379),
+            ]);
+        }
+
+        return $connection;
+    },
+    TaskRepositoryInterface::class => autowire(TaskRepository::class),
+
     Connection::class => static function (): Connection {
         static $connection = null;
 

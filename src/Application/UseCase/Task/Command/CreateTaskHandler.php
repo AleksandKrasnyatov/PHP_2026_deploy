@@ -7,13 +7,13 @@ namespace App\Application\UseCase\Task\Command;
 use App\Application\Gateway\MessageBroker\Message\ProcessTaskMessage;
 use App\Application\Gateway\MessageBroker\ProducerInterface;
 use App\Domain\Entity\Task;
-use App\Domain\Repository\TaskRepository;
+use App\Domain\Repository\TaskRepositoryInterface;
 use App\Domain\ValueObject\Id;
 
 final readonly class CreateTaskHandler
 {
     public function __construct(
-        private TaskRepository $tasks,
+        private TaskRepositoryInterface $tasks,
         private ProducerInterface $producer,
     ) {
     }

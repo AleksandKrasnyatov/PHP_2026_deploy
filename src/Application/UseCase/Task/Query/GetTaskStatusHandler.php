@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Application\UseCase\Task\Query;
 
 use App\Domain\Enum\Status;
-use App\Domain\Repository\TaskRepository;
+use App\Domain\Repository\TaskRepositoryInterface;
 use App\Domain\ValueObject\Id;
 use DomainException;
 
 final readonly class GetTaskStatusHandler
 {
     public function __construct(
-        public TaskRepository $tasks,
+        public TaskRepositoryInterface $tasks,
     ) {
     }
 

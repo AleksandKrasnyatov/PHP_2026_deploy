@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Enum;
 
-enum Status
+enum Status: string
 {
-    case Created;
-    case InProgress;
-    case Cancelled;
-    case Completed;
+    case Created = 'created';
+    case InProgress  = 'inprogress';
+    case Cancelled  = 'cancelled';
+    case Completed  = 'completed';
 }

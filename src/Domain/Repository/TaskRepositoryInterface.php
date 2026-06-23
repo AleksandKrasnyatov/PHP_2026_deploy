@@ -7,7 +7,7 @@ namespace App\Domain\Repository;
 use App\Domain\Entity\Task;
 use App\Domain\ValueObject\Id;
 
-interface TaskRepository
+interface TaskRepositoryInterface
 {
     public function find(Id $id): ?Task;
     public function save(Task $task): void;

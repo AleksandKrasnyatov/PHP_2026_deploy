@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\UseCase\Task\Command;
 
-use App\Domain\Entity\Task;
-use App\Domain\Repository\TaskRepository;
+use App\Domain\Repository\TaskRepositoryInterface;
 use App\Domain\ValueObject\Id;
 use DomainException;
 use Throwable;
@@ -13,7 +12,7 @@ use Throwable;
 final readonly class ProcessTaskHandler
 {
     public function __construct(
-        private TaskRepository $tasks
+        private TaskRepositoryInterface $tasks
     ) {
     }
 
