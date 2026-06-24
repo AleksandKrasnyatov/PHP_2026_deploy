@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 use App\Application\Gateway\MessageBroker\Message\MessageDispatcher;
 use App\Application\Gateway\MessageBroker\Message\ProcessTaskMessageHandler;
+use App\Application\Gateway\MessageBroker\ProducerInterface;
 use App\Domain\Repository\TaskRepositoryInterface;
 use App\Infrastructure\MessageBroker\Amqp\Connection;
+use App\Infrastructure\MessageBroker\Worker\Producer;
 use App\Infrastructure\Repository\TaskRepository;
 use Predis\Client;
 use Psr\Container\ContainerInterface;
@@ -30,6 +32,7 @@ return [
         return $connection;
     },
     TaskRepositoryInterface::class => autowire(TaskRepository::class),
+    ProducerInterface::class => autowire(Producer::class),
 
     Connection::class => static function (): Connection {
         static $connection = null;
