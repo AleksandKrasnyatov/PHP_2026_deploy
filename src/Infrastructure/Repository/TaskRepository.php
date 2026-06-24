@@ -21,6 +21,7 @@ final class TaskRepository implements TaskRepositoryInterface
 
     public function find(Id $id): ?Task
     {
+        /** @var array<string, int|string> $data */
         $data = $this->redis->hgetall($this->key($id));
 
         if (empty($data)) {
@@ -34,7 +35,8 @@ final class TaskRepository implements TaskRepositoryInterface
     {
         $this->redis->hset(
             $this->key($task->id),
-            'status', $task->getStatus()->value
+            'status',
+            $task->getStatus()->value
         );
     }
 

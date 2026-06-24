@@ -31,13 +31,16 @@ final class DeathCounter
         $maxCount = 0;
 
         foreach ($xDeath as $entry) {
-            $count = isset($entry['count']) ? (int)$entry['count'] : 0;
+            $count = isset($entry['count']) ? (int) $entry['count'] : 0;
             $maxCount = max($maxCount, $count);
         }
 
         return $maxCount;
     }
 
+    /**
+     * @return array<int|string>[]
+     */
     public static function xDeath(AMQPMessage $message): array
     {
         if (!$message->has('application_headers')) {
@@ -46,6 +49,7 @@ final class DeathCounter
 
         /** @var AMQPTable $headers */
         $headers = $message->get('application_headers');
+        /** @var array<string, array<int|string>[]> $native */
         $native = $headers->getNativeData();
 
         return $native['x-death'] ?? [];

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Application\Gateway\MessageBroker\Message;
 
-
 use App\Application\UseCase\Task\Command\ProcessTaskCommand;
 use App\Application\UseCase\Task\Command\ProcessTaskHandler;
 
