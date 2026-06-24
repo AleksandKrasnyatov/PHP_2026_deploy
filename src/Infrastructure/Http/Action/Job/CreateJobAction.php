@@ -20,6 +20,9 @@ final readonly class CreateJobAction
     ) {
     }
 
+    /**
+     * @throws JsonException
+     */
     #[OA\Post(
         path: '/job',
         operationId: 'createJob',
@@ -70,9 +73,6 @@ final readonly class CreateJobAction
             ),
         ]
     )]
-    /**
-     * @throws JsonException
-     */
     public function __invoke(Request $request, Response $response): Response
     {
         $createJobRequest = CreateJobRequest::fromRequest($request);

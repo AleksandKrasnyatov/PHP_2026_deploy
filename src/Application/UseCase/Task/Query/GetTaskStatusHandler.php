@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Application\UseCase\Task\Query;
 
-use App\Domain\Enum\Status;
 use App\Domain\Repository\TaskRepositoryInterface;
 use App\Domain\ValueObject\Id;
 use DomainException;
@@ -16,13 +15,13 @@ final readonly class GetTaskStatusHandler
     ) {
     }
 
-    public function handle(GetTaskStatusQuery $query): Status
+    public function handle(GetTaskStatusQuery $query): GetTaskStatusResponse
     {
         $task = $this->tasks->find(new Id($query->taskId));
         if (!$task) {
             throw new DomainException('Задача не найдена');
         }
 
-        return $task->getStatus();
+        return new GetTaskStatusResponse($task->getStatus()->title());
     }
 }
