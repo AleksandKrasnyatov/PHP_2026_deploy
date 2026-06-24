@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Test\Unit\Infrastructure\Http\Exception;
 
 use App\Infrastructure\Http\Exception\ValidationException;
-use DomainException;
 use PHPUnit\Framework\TestCase;
 
 class ValidationExceptionTest extends TestCase
