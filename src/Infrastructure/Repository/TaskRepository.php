@@ -23,6 +23,9 @@ final class TaskRepository implements TaskRepositoryInterface
     {
         $payload = $this->redis->get($this->key($id));
 
+        if (empty($payload)) {
+            return null;
+        }
         $data = json_decode($payload, true);
 
         return new Task($id, Status::from($data['status']));
@@ -31,7 +34,7 @@ final class TaskRepository implements TaskRepositoryInterface
     public function save(Task $task): void
     {
         $this->redis->set($this->key($task->id), json_encode([
-            'status' => $task->getStatus()->name,
+            'status' => $task->getStatus()->value,
         ]));
     }
 
