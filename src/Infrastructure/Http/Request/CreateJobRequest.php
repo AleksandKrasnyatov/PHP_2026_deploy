@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Http\Request;
 
 use App\Infrastructure\Http\Exception\ValidationException;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ServerRequestInterface;
 
 final readonly class CreateJobRequest
 {
@@ -14,7 +14,7 @@ final readonly class CreateJobRequest
     ) {
     }
 
-    public static function fromRequest(Request $request): self
+    public static function fromRequest(ServerRequestInterface $request): self
     {
         $body = $request->getParsedBody();
 
