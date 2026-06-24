@@ -5,43 +5,43 @@ restart: down up
 check: lint cs-check phpstan test
 
 docker-up:
-	docker-compose up -d
+	docker compose up -d
 
 docker-down:
-	docker-compose down --remove-orphans
+	docker compose down --remove-orphans
 
 docker-down-clear:
-	docker-compose down -v --remove-orphans
+	docker compose down -v --remove-orphans
 
 docker-build:
-	docker-compose build
+	docker compose build
 
 composer-install:
-	docker-compose run --rm php-cli composer install
+	docker compose run --rm php-cli composer install
 
 index:
-	docker-compose run --rm php-cli php bin/index.php
+	docker compose run --rm php-cli php bin/index.php
 
 consume:
-	docker-compose run --rm php-cli php bin/consume.php
+	docker compose run --rm php-cli php bin/consume.php
 
 publish:
-	docker-compose run --rm php-cli php bin/publish.php $(EMAIL)
+	docker compose run --rm php-cli php bin/publish.php $(EMAIL)
 
 test:
-	docker-compose run --rm php-cli composer test
+	docker compose run --rm php-cli composer test
 
 test-coverage:
-	docker-compose run --rm php-cli composer test-coverage
+	docker compose run --rm php-cli composer test-coverage
 
 cs-check:
-	docker-compose run --rm php-cli composer cs-check
+	docker compose run --rm php-cli composer cs-check
 
 cs-fix:
-	docker-compose run --rm php-cli composer cs-fix
+	docker compose run --rm php-cli composer cs-fix
 
 phpstan:
-	docker-compose run --rm php-cli composer phpstan
+	docker compose run --rm php-cli composer phpstan
 
 lint:
-	docker-compose run --rm php-cli composer lint
+	docker compose run --rm php-cli composer lint
