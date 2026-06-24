@@ -6,6 +6,7 @@ namespace App\Infrastructure\Http\Middleware;
 
 use App\Infrastructure\Http\Exception\ValidationException;
 use App\Infrastructure\Http\Response\JsonResponse;
+use Override;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
