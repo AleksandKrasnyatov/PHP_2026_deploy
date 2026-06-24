@@ -21,21 +21,21 @@ final class TaskRepository implements TaskRepositoryInterface
 
     public function find(Id $id): ?Task
     {
-        $payload = $this->redis->get($this->key($id));
+        $data = $this->redis->hgetall($this->key($id));
 
-        if (empty($payload)) {
+        if (empty($data)) {
             return null;
         }
-        $data = json_decode($payload, true);
 
         return new Task($id, Status::from($data['status']));
     }
 
     public function save(Task $task): void
     {
-        $this->redis->set($this->key($task->id), json_encode([
-            'status' => $task->getStatus()->value,
-        ]));
+        $this->redis->hset(
+            $this->key($task->id),
+            'status', $task->getStatus()->value
+        );
     }
 
     private function key(Id $id): string
