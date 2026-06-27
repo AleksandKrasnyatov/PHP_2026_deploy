@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - AKrasnyatov/hw20
+      - AKrasnyatov/hw21
   pull_request:
 
 concurrency:
