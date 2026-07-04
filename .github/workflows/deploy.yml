@@ -36,11 +36,12 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         env:
           GITHUB_REPO: ${{ github.repository }}
+          DEPLOY_DIR: ${{ vars.DEPLOY_DIR }}
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          envs: GITHUB_REPO
+          envs: GITHUB_REPO,DEPLOY_DIR
           script: |
             cd /app/deploy
             chmod +x scripts/deploy.sh
