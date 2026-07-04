@@ -23,10 +23,17 @@ return [
         static $connection = null;
 
         if ($connection === null) {
-            $connection = new Client([
+            $params = [
                 'host' => getenv('REDIS_HOST') ?: 'redis',
                 'port' => (int) (getenv('REDIS_PORT') ?: 6379),
-            ]);
+            ];
+
+            $password = getenv('REDIS_PASSWORD');
+            if ($password !== false && $password !== '') {
+                $params['password'] = $password;
+            }
+
+            $connection = new Client($params);
         }
 
         return $connection;
