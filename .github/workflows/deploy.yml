@@ -28,7 +28,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: configs/environments/production/.env,configs/environments/production/docker-compose.yml,configs/environments/production/haproxy,configs/environments/production/nginx,configs/environments/production/scripts
+          source: configs/environments/production/*
           target: /app/deploy/
           strip_components: 3
 
