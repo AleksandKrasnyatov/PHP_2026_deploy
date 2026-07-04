@@ -18,7 +18,7 @@ jobs:
       - name: Checkout config repo
         uses: actions/checkout@v4
         with:
-          repository: YOUR_USERNAME/deploy-configs
+          repository: AleksandKrasnyatov/PHP_2026_deploy_config
           token: ${{ secrets.DEPLOY_CONFIG_TOKEN }}
           path: configs
 
